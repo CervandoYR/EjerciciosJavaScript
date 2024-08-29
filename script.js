@@ -94,6 +94,13 @@ function mostrarInputs() {
     // Resetear el resultado
     document.getElementById("resultadoArea").innerText = '';
 
+    // Limpiar valores de los inputs
+    document.getElementById("entradaLadoCuadrado").value = '';
+    document.getElementById("entradaLargo").value = '';
+    document.getElementById("entradaAncho").value = '';
+    document.getElementById("entradaBase").value = '';
+    document.getElementById("entradaAlturaTriangulo").value = '';
+
     // Mostrar solo los inputs correspondientes
     if (figura === "cuadrado") {
         inputsCuadrado.classList.remove("d-none");
@@ -107,6 +114,7 @@ function mostrarInputs() {
 document.addEventListener('DOMContentLoaded', function() {
     mostrarInputs(); // Ejecutar al cargar para mostrar la primera opción seleccionada
 });
+
 
 
 
