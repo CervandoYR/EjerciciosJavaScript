@@ -100,6 +100,10 @@ function mostrarInputs() {
         inputsTriangulo.classList.remove("d-none");
     }
 }
+document.addEventListener('DOMContentLoaded', function() {
+    mostrarInputs(); // Ejecutar al cargar para mostrar la primera opción seleccionada
+});
+
 
 // Calcular área
 function calcularArea() {
