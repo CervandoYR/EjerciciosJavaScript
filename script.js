@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
 // Calcular área
 function calcularArea() {
     const figura = document.getElementById("tipoFigura").value;
@@ -124,31 +123,25 @@ function calcularArea() {
 
     if (figura === "cuadrado") {
         const lado = parseFloat(document.getElementById("entradaLadoCuadrado").value);
-        if (!isNaN(lado)) {
-            area = lado * lado;
-        } else {
-            area = 'Valor inválido';
-        }
+        area = lado * lado;
     } else if (figura === "rectangulo") {
         const largo = parseFloat(document.getElementById("entradaLargo").value);
         const ancho = parseFloat(document.getElementById("entradaAncho").value);
-        if (!isNaN(largo) && !isNaN(ancho)) {
-            area = largo * ancho;
-        } else {
-            area = 'Valores inválidos';
-        }
+        area = largo * ancho;
     } else if (figura === "triangulo") {
         const base = parseFloat(document.getElementById("entradaBase").value);
         const altura = parseFloat(document.getElementById("entradaAlturaTriangulo").value);
-        if (!isNaN(base) && !isNaN(altura)) {
-            area = (base * altura) / 2;
-        } else {
-            area = 'Valores inválidos';
-        }
+        area = (base * altura) / 2;
     }
 
-    document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`;
+    // Verificar si el área está definida y no es NaN
+    if (!isNaN(area)) {
+        document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`;
+    } else {
+        document.getElementById("resultadoArea").innerText = `Por favor, ingresa valores válidos.`;
+    }
 }
+
 
 
 
