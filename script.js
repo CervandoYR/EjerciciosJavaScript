@@ -416,6 +416,7 @@ function resetModal8() {
 }
 
 function resetModal9() {
+    document.getElementById("tipoFigura").value = "";
     document.getElementById("valorLongitud").value = "";
     document.getElementById("resultadoConversionLongitud").innerText = "";
     document.getElementById("valorMasa").value = "";
