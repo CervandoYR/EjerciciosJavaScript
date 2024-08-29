@@ -399,7 +399,6 @@ function resetModal5() {
 }
 
 function resetModal6() {
-    document.getElementById("tipoFigura").value = "";
     document.getElementById("entradaLadoCuadrado").value = "";
     document.getElementById("entradaAncho").value = "";
     document.getElementById("entradaLargo").value = "";
