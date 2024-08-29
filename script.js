@@ -91,6 +91,9 @@ function mostrarInputs() {
     inputsRectangulo.classList.add("d-none");
     inputsTriangulo.classList.add("d-none");
 
+    // Resetear el resultado
+    document.getElementById("resultadoArea").innerText = '';
+
     // Mostrar solo los inputs correspondientes
     if (figura === "cuadrado") {
         inputsCuadrado.classList.remove("d-none");
@@ -100,9 +103,11 @@ function mostrarInputs() {
         inputsTriangulo.classList.remove("d-none");
     }
 }
+
 document.addEventListener('DOMContentLoaded', function() {
     mostrarInputs(); // Ejecutar al cargar para mostrar la primera opción seleccionada
 });
+
 
 
 // Calcular área
