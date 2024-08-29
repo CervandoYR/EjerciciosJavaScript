@@ -407,8 +407,9 @@ function resetModal5() {
 
 function resetModal6() {
     document.getElementById("tipoFigura").value = "";
-    document.getElementById("entradaLado").value = "";
-    document.getElementById("entradaAltura").value = "";
+    document.getElementById("entradaLadoCuadrado").value = "";
+    document.getElementById("entradaAncho").value = "";
+    document.getElementById("entradaLargo").value = "";
     document.getElementById("resultadoArea").innerText = "";
 }
 
