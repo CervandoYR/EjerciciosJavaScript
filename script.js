@@ -113,14 +113,7 @@ function calcularArea() {
         if (!isNaN(largo) && largo > 0 && !isNaN(ancho) && ancho > 0) {
             area = largo * ancho;
         }
-    } else if (figura === "triangulo") {
-        const base = parseFloat(document.getElementById("entradaBase").value);
-        const altura = parseFloat(document.getElementById("entradaAlturaTriangulo").value);
-        if (!isNaN(base) && base > 0 && !isNaN(altura) && altura > 0) {
-            area = (base * altura) / 2;
-        }
-    }
-
+    
     if (typeof area !== 'undefined') {
         document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`;
     } else {
