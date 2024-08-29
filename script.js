@@ -86,10 +86,104 @@ function mostrarInputs() {
 
     document.getElementById("resultadoArea").innerText = '';
     
+// Mostrar inputs según figura seleccionada
+function mostrarInputs() {
+    const figura = document.getElementById("tipoFigura").value;
+    const inputsCuadrado = document.getElementById("inputsCuadrado");
+    const inputsRectangulo = document.getElementById("inputsRectangulo");
+    const inputsTriangulo = document.getElementById("inputsTriangulo");
+
+    // Ocultar todos los inputs
+    inputsCuadrado.classList.add("d-none");
+    inputsRectangulo.classList.add("d-none");
+    inputsTriangulo.classList.add("d-none");
+
+    // Resetear el resultado
+    document.getElementById("resultadoArea").innerText = '';
+
     // Limpiar valores de los inputs
     document.getElementById("entradaLadoCuadrado").value = '';
     document.getElementById("entradaLargo").value = '';
     document.getElementById("entradaAncho").value = '';
+
+    document.getElementById("entradaBase").value = '';
+    document.getElementById("entradaAlturaTriangulo").value = '';
+
+    // Mostrar solo los inputs correspondientes
+    if (figura === "cuadrado") {
+        inputsCuadrado.classList.remove("d-none");
+    } else if (figura === "rectangulo") {
+        inputsRectangulo.classList.remove("d-none");
+    } else if (figura === "triangulo") {
+        inputsTriangulo.classList.remove("d-none");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    mostrarInputs(); // Ejecutar al cargar para mostrar la primera opción seleccionada
+});
+
+
+// Mostrar inputs según figura seleccionada
+function mostrarInputs() {
+    const figura = document.getElementById("tipoFigura").value;
+    const inputsCuadrado = document.getElementById("inputsCuadrado");
+    const inputsRectangulo = document.getElementById("inputsRectangulo");
+    const inputsTriangulo = document.getElementById("inputsTriangulo");
+    
+    // Ocultar todos los inputs
+    inputsCuadrado.classList.add("d-none");
+    inputsRectangulo.classList.add("d-none");
+    inputsTriangulo.classList.add("d-none");
+    
+    // Reiniciar el resultado al cambiar la figura
+    document.getElementById("resultadoArea").innerText = "";
+
+    // Mostrar solo los inputs correspondientes
+    if (figura === "cuadrado") {
+        inputsCuadrado.classList.remove("d-none");
+    } else if (figura === "rectangulo") {
+        inputsRectangulo.classList.remove("d-none");
+    } else if (figura === "triangulo") {
+        inputsTriangulo.classList.remove("d-none");
+    }
+}
+
+// Calcular área
+function calcularArea() {
+    const figura = document.getElementById("tipoFigura").value;
+    let area;
+
+    if (figura === "cuadrado") {
+        const lado = parseFloat(document.getElementById("entradaLadoCuadrado").value);
+        if (!isNaN(lado) && lado > 0) {
+            area = lado * lado;
+        }
+    } else if (figura === "rectangulo") {
+        const largo = parseFloat(document.getElementById("entradaLargo").value);
+        const ancho = parseFloat(document.getElementById("entradaAncho").value);
+        if (!isNaN(largo) && largo > 0 && !isNaN(ancho) && ancho > 0) {
+            area = largo * ancho;
+        }
+    } else if (figura === "triangulo") {
+        const base = parseFloat(document.getElementById("entradaBase").value);
+        const altura = parseFloat(document.getElementById("entradaAlturaTriangulo").value);
+        if (!isNaN(base) && base > 0 && !isNaN(altura) && altura > 0) {
+            area = (base * altura) / 2;
+        }
+    }
+
+    // Verificar si el área está definida y no es NaN
+    if (typeof area !== 'undefined') {
+        document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`;
+    } else {
+        document.getElementById("resultadoArea").innerText = `Por favor, ingresa valores válidos.`;
+    }
+}
+
+// Simulador de notas
+const estudiantes = []; // Array para almacenar los estudiantes y sus notas
+const notaCorte = 12;
 
 
     if (figura === "cuadrado") {
@@ -406,6 +500,14 @@ function mostrarInputs() {
     }
 
 
+// Funciones de resetear
+function resetModal6() {
+    document.getElementById("tipoFigura").value = "";
+    mostrarInputs(); // Ocultar todos los inputs
+    document.getElementById("resultadoArea").innerText = ""; // Limpiar el resultado
+}
+
+
     function resetModal7() {
         document.getElementById("entradaFraseUnica").value = "";
         document.getElementById("resultadoPalabrasUnicas").innerText = "";
@@ -447,3 +549,10 @@ function mostrarInputs() {
         document.getElementById("entradaDesplazamiento").value = "";
         document.getElementById("resultadoCesar").innerText = "";
     }
+
+// Resetear modal 12
+function resetModal12() {
+    document.getElementById("entradaTexto").value = "";
+    document.getElementById("entradaDesplazamiento").value = "";
+    document.getElementById("resultadoCesar").innerText = "";
+}

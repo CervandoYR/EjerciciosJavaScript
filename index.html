@@ -181,14 +181,25 @@
         </div>
     </div>
 
-    <!-- Modal 6: Calculadora de Áreas de Figuras -->
-    <div class="modal fade" id="modal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ejercicio 6: Calculadora de Áreas de Figuras</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Modal 6: Calculadora de Áreas de Figuras -->
+<div class="modal fade" id="modal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ejercicio 6: Calculadora de Áreas de Figuras</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Selecciona un tipo de figura y proporciona sus dimensiones.</p>
+                <select id="tipoFigura" class="form-select" onchange="mostrarInputs()">
+                    <option value="">Selecciona una figura</option>
+                    <option value="cuadrado">Cuadrado</option>
+                    <option value="rectangulo">Rectángulo</option>
+                    <option value="triangulo">Triángulo</option>
+                </select>
+                <div id="inputsCuadrado" class="d-none">
+                    <input type="number" id="entradaLadoCuadrado" class="form-control mt-2" placeholder="Lado (para cuadrado)">
                 </div>
                 <div class="modal-body">
                     <p>Selecciona un tipo de figura y proporciona sus dimensiones.</p>
@@ -207,10 +218,21 @@
                     <button class="btn btn-success mt-2" onclick="calcularArea()">Calcular Área</button>
                     <button class="btn btn-danger mt-2" onclick="resetModal6()">Resetear</button>
                     <p id="resultadoArea"></p>
+                <div id="inputsRectangulo" class="d-none">
+                    <input type="number" id="entradaLargo" class="form-control mt-2" placeholder="Largo (para rectángulo)">
+                    <input type="number" id="entradaAncho" class="form-control mt-2" placeholder="Ancho (para rectángulo)">
                 </div>
+                <div id="inputsTriangulo" class="d-none">
+                    <input type="number" id="entradaBase" class="form-control mt-2" placeholder="Base (para triángulo)">
+                    <input type="number" id="entradaAlturaTriangulo" class="form-control mt-2" placeholder="Altura (para triángulo)">
+                </div>
+                <button class="btn btn-success mt-2" onclick="calcularArea()">Calcular Área</button>
+                <button class="btn btn-danger mt-2" onclick="resetModal6()">Resetear</button>
+                <p id="resultadoArea"></p>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Modal7 : Simulador de Notas de Estudiantes -->
     <div class="modal fade" id="modal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
