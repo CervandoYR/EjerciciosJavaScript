@@ -79,6 +79,50 @@ function convertirHoras() {
     document.getElementById("resultadoMinutos").innerText = `${horas} horas son ${minutos} minutos.`;
 }
 
+// Mostrar inputs según figura seleccionada
+function mostrarInputs() {
+    const figura = document.getElementById("tipoFigura").value;
+    const inputsCuadrado = document.getElementById("inputsCuadrado");
+    const inputsRectangulo = document.getElementById("inputsRectangulo");
+    const inputsTriangulo = document.getElementById("inputsTriangulo");
+
+    // Ocultar todos los inputs
+    inputsCuadrado.classList.add("d-none");
+    inputsRectangulo.classList.add("d-none");
+    inputsTriangulo.classList.add("d-none");
+
+    // Mostrar solo los inputs correspondientes
+    if (figura === "cuadrado") {
+        inputsCuadrado.classList.remove("d-none");
+    } else if (figura === "rectangulo") {
+        inputsRectangulo.classList.remove("d-none");
+    } else if (figura === "triangulo") {
+        inputsTriangulo.classList.remove("d-none");
+    }
+}
+
+// Calcular área
+function calcularArea() {
+    const figura = document.getElementById("tipoFigura").value;
+    let area;
+
+    if (figura === "cuadrado") {
+        const lado = parseFloat(document.getElementById("entradaLadoCuadrado").value);
+        area = lado * lado;
+    } else if (figura === "rectangulo") {
+        const largo = parseFloat(document.getElementById("entradaLargo").value);
+        const ancho = parseFloat(document.getElementById("entradaAncho").value);
+        area = largo * ancho;
+    } else if (figura === "triangulo") {
+        const base = parseFloat(document.getElementById("entradaBase").value);
+        const altura = parseFloat(document.getElementById("entradaAlturaTriangulo").value);
+        area = (base * altura) / 2;
+    }
+
+    document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`;
+}
+
+
 // Simulador de notas
 const estudiantes = []; // Array para almacenar los estudiantes y sus notas
 const notaCorte = 12;
@@ -353,10 +397,10 @@ function resetModal5() {
     document.getElementById("resultadoMinutos").innerText = "";
 }
 
+// Funciones de resetear
 function resetModal6() {
     document.getElementById("tipoFigura").value = "";
-    document.getElementById("entradaLado").value = "";
-    document.getElementById("entradaAltura").value = "";
+    mostrarInputs(); // Resetear la visibilidad de inputs
     document.getElementById("resultadoArea").innerText = "";
 }
 
