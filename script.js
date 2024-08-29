@@ -148,19 +148,25 @@ function calcularArea() {
 
     if (figura === "cuadrado") {
         const lado = parseFloat(document.getElementById("entradaLadoCuadrado").value);
-        area = lado * lado;
+        if (!isNaN(lado) && lado > 0) {
+            area = lado * lado;
+        }
     } else if (figura === "rectangulo") {
         const largo = parseFloat(document.getElementById("entradaLargo").value);
         const ancho = parseFloat(document.getElementById("entradaAncho").value);
-        area = largo * ancho;
+        if (!isNaN(largo) && largo > 0 && !isNaN(ancho) && ancho > 0) {
+            area = largo * ancho;
+        }
     } else if (figura === "triangulo") {
         const base = parseFloat(document.getElementById("entradaBase").value);
         const altura = parseFloat(document.getElementById("entradaAlturaTriangulo").value);
-        area = (base * altura) / 2;
+        if (!isNaN(base) && base > 0 && !isNaN(altura) && altura > 0) {
+            area = (base * altura) / 2;
+        }
     }
 
     // Verificar si el área está definida y no es NaN
-    if (!isNaN(area)) {
+    if (typeof area !== 'undefined') {
         document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`;
     } else {
         document.getElementById("resultadoArea").innerText = `Por favor, ingresa valores válidos.`;
