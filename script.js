@@ -117,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 // Calcular área
 function calcularArea() {
     const figura = document.getElementById("tipoFigura").value;
@@ -125,19 +124,32 @@ function calcularArea() {
 
     if (figura === "cuadrado") {
         const lado = parseFloat(document.getElementById("entradaLadoCuadrado").value);
-        area = lado * lado;
+        if (!isNaN(lado)) {
+            area = lado * lado;
+        } else {
+            area = 'Valor inválido';
+        }
     } else if (figura === "rectangulo") {
         const largo = parseFloat(document.getElementById("entradaLargo").value);
         const ancho = parseFloat(document.getElementById("entradaAncho").value);
-        area = largo * ancho;
+        if (!isNaN(largo) && !isNaN(ancho)) {
+            area = largo * ancho;
+        } else {
+            area = 'Valores inválidos';
+        }
     } else if (figura === "triangulo") {
         const base = parseFloat(document.getElementById("entradaBase").value);
         const altura = parseFloat(document.getElementById("entradaAlturaTriangulo").value);
-        area = (base * altura) / 2;
+        if (!isNaN(base) && !isNaN(altura)) {
+            area = (base * altura) / 2;
+        } else {
+            area = 'Valores inválidos';
+        }
     }
 
     document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`;
 }
+
 
 
 // Simulador de notas
