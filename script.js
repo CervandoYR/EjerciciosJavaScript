@@ -90,8 +90,6 @@ function mostrarInputs() {
     document.getElementById("entradaLadoCuadrado").value = '';
     document.getElementById("entradaLargo").value = '';
     document.getElementById("entradaAncho").value = '';
-    document.getElementById("entradaBase").value = '';
-    document.getElementById("entradaAlturaTriangulo").value = '';
 
     if (figura === "cuadrado") {
         document.getElementById("inputsCuadrado").classList.remove("d-none");
