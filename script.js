@@ -116,6 +116,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Mostrar inputs según figura seleccionada
+function mostrarInputs() {
+    const figura = document.getElementById("tipoFigura").value;
+    const inputsCuadrado = document.getElementById("inputsCuadrado");
+    const inputsRectangulo = document.getElementById("inputsRectangulo");
+    const inputsTriangulo = document.getElementById("inputsTriangulo");
+    
+    // Ocultar todos los inputs
+    inputsCuadrado.classList.add("d-none");
+    inputsRectangulo.classList.add("d-none");
+    inputsTriangulo.classList.add("d-none");
+    
+    // Reiniciar el resultado al cambiar la figura
+    document.getElementById("resultadoArea").innerText = "";
+
+    // Mostrar solo los inputs correspondientes
+    if (figura === "cuadrado") {
+        inputsCuadrado.classList.remove("d-none");
+    } else if (figura === "rectangulo") {
+        inputsRectangulo.classList.remove("d-none");
+    } else if (figura === "triangulo") {
+        inputsTriangulo.classList.remove("d-none");
+    }
+}
+
 // Calcular área
 function calcularArea() {
     const figura = document.getElementById("tipoFigura").value;
@@ -141,9 +166,6 @@ function calcularArea() {
         document.getElementById("resultadoArea").innerText = `Por favor, ingresa valores válidos.`;
     }
 }
-
-
-
 
 // Simulador de notas
 const estudiantes = []; // Array para almacenar los estudiantes y sus notas
@@ -422,8 +444,8 @@ function resetModal5() {
 // Funciones de resetear
 function resetModal6() {
     document.getElementById("tipoFigura").value = "";
-    mostrarInputs(); // Resetear la visibilidad de inputs
-    document.getElementById("resultadoArea").innerText = "";
+    mostrarInputs(); // Ocultar todos los inputs
+    document.getElementById("resultadoArea").innerText = ""; // Limpiar el resultado
 }
 
 function resetModal7() {
