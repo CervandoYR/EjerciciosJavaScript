@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="styless.css">
+    <title>Ejercicios JavaScript</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Ejercicios de JavaScript</h1>
+        <div class="row mt-4">
+            <!-- Botones para abrir cada modal de los  ejercicio js -->
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal1" style="margin: 20px; padding: 30px;">Ejercicio 1:
+                    Contador de Números Pares</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal2" style="margin: 20px; padding: 30px;">Ejercicio 2:
+                    Calculadora de Exponentes</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal3" style="margin: 20px; padding: 30px;">Ejercicio 3:
+                    Inversor de frases o numeros</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal4" style="margin: 20px; padding: 30px;">Ejercicio 4:
+                    Generador de Números Primos</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal5" style="margin: 20px; padding: 30px;">Ejercicio 5:
+                    Conversor de Horas a Minutos</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal6" style="margin: 20px; padding: 30px;">Ejercicio 6:
+                    Calculadora de Áreas de Figuras</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal7" style="margin: 20px; padding: 30px;">Ejercicio 7:
+                    Simulador de Notas y ranking</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal8" style="margin: 20px; padding: 30px;">Ejercicio 8:
+                    Validador de Palabras Palíndromas</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal9" style="margin: 20px; padding: 30px;">Ejercicio 9:
+                    Convertidor de Unidades</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal10" style="margin: 20px; padding: 30px;">Ejercicio 10:
+                    Cálculo de Edad en Días</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal11" style="margin: 20px; padding: 30px;">Ejercicio 11:
+                    Calculador de Factorial</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal12" style="margin: 20px; padding: 30px;">Ejercicio 12:
+                    Cifrado cesar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal 1: Contador de Números Pares -->
+    <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 1: Contador de Números Pares</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce un número para contar cuántos números pares hay desde 1 hasta ese número.</p>
+                    <input type="number" id="entradaContadorPares" class="form-control" placeholder="Escribe un número">
+                    <button class="btn btn-success mt-2" onclick="contarNumerosPares()">Contar Pares</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal1()">Resetear</button>
+                    <p id="resultadoContadorPares"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Calculadora de Exponentes -->
+    <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 2: Calculadora de Exponentes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce una base y un exponente para calcular el resultado.</p>
+                    <input type="number" id="entradaBase" class="form-control" placeholder="Base">
+                    <input type="number" id="entradaExponente" class="form-control mt-2" placeholder="Exponente">
+                    <button class="btn btn-success mt-2" onclick="calcularExponente()">Calcular</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal2()">Resetear</button>
+                    <p id="resultadoExponente"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Inversor de Palabras -->
+    <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 3: Inversor de Palabras, frases o numeros</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce una palabra, numeros o frases para invertirla. Debe tener al menos 2 caracteres.</p>
+                    <input type="text" id="entradaInversor" class="form-control"
+                        placeholder="Escribe una palabra o frase">
+                    <button class="btn btn-success mt-2" onclick="invertirCadena()">Invertir</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal3()">Resetear</button>
+                    <p id="resultadoInversor"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Generador de Números Primos -->
+    <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 4: Generador de Números Primos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce un número para generar los primeros números primos hasta esa cantidad.</p>
+                    <input type="number" id="entradaPrimos" class="form-control" placeholder="Escribe un número">
+                    <button class="btn btn-success mt-2" onclick="generarPrimos()">Generar Primos</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal4()">Resetear</button>
+                    <p id="resultadoPrimos"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Conversor de Horas a Minutos -->
+    <div class="modal fade" id="modal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 5: Conversor de Horas a Minutos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce una cantidad de horas para convertirlas en minutos.</p>
+                    <input type="number" id="entradaHoras" class="form-control" placeholder="Escribe horas">
+                    <button class="btn btn-success mt-2" onclick="convertirHoras()">Convertir</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal5()">Resetear</button>
+                    <p id="resultadoMinutos"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Calculadora de Áreas de Figuras -->
+    <div class="modal fade" id="modal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 6: Calculadora de Áreas de Figuras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Selecciona un tipo de figura y proporciona sus dimensiones.</p>
+                    <select id="tipoFigura" class="form-select" onchange="mostrarInputs()">
+                        <option value="">Selecciona una figura</option>
+                        <option value="cuadrado">Cuadrado</option>
+                        <option value="rectangulo">Rectángulo</option>
+                        <option value="triangulo">Triángulo</option>
+                    </select>
+                    <div id="inputsCuadrado" class="d-none">
+                        <input type="number" id="entradaLadoCuadrado" class="form-control mt-2" placeholder="Lado">
+                    </div>
+                    <div id="inputsRectangulo" class="d-none">
+                        <input type="number" id="entradaLargo" class="form-control mt-2" placeholder="Largo">
+                        <input type="number" id="entradaAncho" class="form-control mt-2" placeholder="Ancho">
+                    </div>
+                    <div id="inputsTriangulo" class="d-none">
+                        <input type="number" id="entradaBase" class="form-control mt-2" placeholder="Base">
+                        <input type="number" id="entradaAlturaTriangulo" class="form-control mt-2" placeholder="Altura">
+                    </div>
+                    <button class="btn btn-success mt-2" onclick="calcularArea()">Calcular Área</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal6()">Resetear</button>
+                    <p id="resultadoArea"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal7 : Simulador de Notas de Estudiantes -->
+    <div class="modal fade" id="modal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Simulador de Notas de Estudiantes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="nombreEstudiante" class="form-control" placeholder="Nombre del estudiante">
+                    <input type="number" id="notaEstudiante" class="form-control mt-2" placeholder="Nota del estudiante"
+                        min="0" max="100">
+                    <button class="btn btn-success mt-2" onclick="agregarNota()">Agregar Nota</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModalNotas()">Resetear</button>
+                    <p id="resultadoNotas"></p>
+                    <p id="ranking"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal 8: Validador de Palabras Palíndromas -->
+    <div class="modal fade" id="modal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 8: Validador de Palabras Palíndromas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce una palabra o frase para verificar si es un palíndromo.</p>
+                    <input type="text" id="entradaPalindromo" class="form-control"
+                        placeholder="Escribe una palabra o frase">
+                    <button class="btn btn-success mt-2" onclick="validarPalindromo()">Verificar</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal8()">Resetear</button>
+                    <p id="resultadoPalindromo"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal 9: Convertidor de Unidades -->
+    <div class="modal fade" id="modal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 9: Convertidor de Unidades</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce un valor y selecciona las unidades para la conversión.</p>
+                    <input type="number" id="valorLongitud" class="form-control" placeholder="Valor para longitud">
+                    <select id="unidadDesdeLongitud" class="form-select mt-2">
+                        <option value="metros">Metros</option>
+                        <option value="kilometros">Kilómetros</option>
+                        <option value="centimetros">Centímetros</option>
+                    </select>
+                    <select id="unidadHastaLongitud" class="form-select mt-2">
+                        <option value="metros">Metros</option>
+                        <option value="kilometros">Kilómetros</option>
+                        <option value="centimetros">Centímetros</option>
+                    </select>
+                    <button class="btn btn-success mt-2" onclick="convertirUnidades()">Convertir Longitud</button>
+                    <p id="resultadoConversionLongitud"></p>
+
+                    <input type="number" id="valorMasa" class="form-control mt-2" placeholder="Valor para masa">
+                    <select id="unidadDesdeMasa" class="form-select mt-2">
+                        <option value="gramos">Gramos</option>
+                        <option value="kilogramos">Kilogramos</option>
+                    </select>
+                    <select id="unidadHastaMasa" class="form-select mt-2">
+                        <option value="gramos">Gramos</option>
+                        <option value="kilogramos">Kilogramos</option>
+                    </select>
+                    <button class="btn btn-success mt-2" onclick="convertirMasa()">Convertir Masa</button>
+                    <p id="resultadoConversionMasa"></p>
+
+                    <button class="btn btn-danger mt-2" onclick="resetModal9()">Resetear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 10: Cálculo de Edad en Días -->
+    <div class="modal fade" id="modal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 10: Cálculo de Edad en Días</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce tu fecha de nacimiento para calcular tu edad en días.</p>
+                    <input type="date" id="entradaFecha" class="form-control">
+                    <button class="btn btn-success mt-2" onclick="calcularEdad()">Calcular Edad</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal10()">Resetear</button>
+                    <p id="resultadoEdad"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 11: Calculador de Factorial -->
+    <div class="modal fade" id="modal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 11: Calculador de Factorial</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce un número entero no negativo para calcular su factorial.</p>
+                    <input type="number" id="entradaFactorial" class="form-control" placeholder="Escribe un número"
+                        min="0">
+                    <button class="btn btn-success mt-2" onclick="calcularFactorial()">Calcular Factorial</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal11()">Resetear</button>
+                    <p id="resultadoFactorial"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 12: Cifrador César -->
+    <div class="modal fade" id="modal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejercicio 12: Cifrador César</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Introduce un texto y un desplazamiento para cifrar.</p>
+                    <input type="text" id="entradaTexto" class="form-control" placeholder="Escribe un texto">
+                    <input type="number" id="entradaDesplazamiento" class="form-control mt-2"
+                        placeholder="Desplazamiento" min="1">
+                    <button class="btn btn-success mt-2" onclick="cifrarCesar()">Cifrar</button>
+                    <button class="btn btn-danger mt-2" onclick="resetModal12()">Resetear</button>
+                    <p id="resultadoCesar"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

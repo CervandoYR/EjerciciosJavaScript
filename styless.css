@@ -1,0 +1,66 @@
+/* Estilos generales */
+body {
+    background-color: #FFFFE0;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    font-size: 50px;
+    color: #007bff;
+}
+
+/* Estilos de los botones */
+.btn {
+    transition: background-color 0.3s, transform 0.2s;
+
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Estilos de los modales */
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+/* Estilos de los inputs */
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Espaciado en los resultados */
+p {
+    margin-top: 10px;
+}
+
+/* Estilos de contenedor */
+.container {
+    margin-top: 30px;
+}
+
+/* Estilos del modal cuerpo */
+.modal-body {
+    background-color: #ffffff;
+}
