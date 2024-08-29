@@ -78,319 +78,372 @@ function convertirHoras() {
     const minutos = horas * 60;
     document.getElementById("resultadoMinutos").innerText = `${horas} horas son ${minutos} minutos.`;
 }
+// Mostrar inputs según figura seleccionada
+function mostrarInputs() {
+    const figura = document.getElementById("tipoFigura").value;
+    document.getElementById("inputsCuadrado").classList.add("d-none");
+    document.getElementById("inputsRectangulo").classList.add("d-none");
 
-// Simulador de notas
-const estudiantes = []; // Array para almacenar los estudiantes y sus notas
-const notaCorte = 12;
+    document.getElementById("resultadoArea").innerText = '';
+    
+    // Limpiar valores de los inputs
+    document.getElementById("entradaLadoCuadrado").value = '';
+    document.getElementById("entradaLargo").value = '';
+    document.getElementById("entradaAncho").value = '';
 
-// Función para agregar una nueva nota
-function agregarNota() {
-    // Obtener el nombre y la nota ingresados por el usuario
-    const nombre = document.getElementById("nombreEstudiante").value.trim();
-    const nota = document.getElementById("notaEstudiante").value.trim(); // Obtener la nota como cadena
 
-    // Validar la entrada
-    const esNumeroValido = /^\d+(\.\d+)?$/.test(nota); // Verificar que sea un número válido
-    const esNombreValido = /^[A-Za-z\s]+$/.test(nombre); // Verificar solo letras y espacios
+    if (figura === "cuadrado") {
+        document.getElementById("inputsCuadrado").classList.remove("d-none");
+    } else if (figura === "rectangulo") {
+        document.getElementById("inputsRectangulo").classList.remove("d-none");
 
-    if (nombre === "" || !esNombreValido || !esNumeroValido || Number(nota) < 0 || Number(nota) > 20) {
-        document.getElementById("resultadoNotas").innerText = "Por favor, ingresa un nombre válido (solo letras) y una nota válida (0-20).";
-        return; // Validacion
     }
-
-    // Convertir la nota a número para hacer el calculo
-    const notaNumero = Number(nota);
-
-    // Verificar si el estudiante ya existe en el array
-    const estudianteExistente = estudiantes.find(est => est.nombre.toLowerCase() === nombre.toLowerCase());
-
-    if (estudianteExistente) {
-        // Si existe, actualizar la nota
-        estudianteExistente.nota = notaNumero;
-    } else {
-        // Si no existe, agregar nuevo estudiante
-        estudiantes.push({ nombre, nota: notaNumero });
-    }
-
-    // Calcular el promedio y mostrar resultados
-    mostrarResultados();
 }
+    function calcularArea() {
+        const figura = document.getElementById("tipoFigura").value; // Obtener figura seleccionada
+        let area = 0; // Inicializar área
 
-// Función para mostrar los resultados
-function mostrarResultados() {
-    let totalNotas = 0; // Variable para acumular el total de notas
-    let resultadoTexto = ""; // Variable para almacenar el texto de resultados
+        // Comprobar el tipo de figura y calcular el área correspondiente
+        if (figura === "cuadrado") {
+            const lado = parseFloat(document.getElementById("entradaLadoCuadrado").value);
+            if (!isNaN(lado) && lado > 0) {
+                area = lado * lado; // Área del cuadrado
+            }
+        } else if (figura === "rectangulo") {
+            const largo = parseFloat(document.getElementById("entradaLargo").value);
+            const ancho = parseFloat(document.getElementById("entradaAncho").value);
+            if (!isNaN(largo) && largo > 0 && !isNaN(ancho) && ancho > 0) {
+                area = largo * ancho; // Área del rectángulo
+            }
 
-    // Calcular el total y generar el texto de resultados
-    estudiantes.forEach(estudiante => {
-        totalNotas += estudiante.nota; // Sumar la nota del estudiante al total
-        // Crear el texto con el nombre, la nota y si está aprobado o reprobado
-        resultadoTexto += `${estudiante.nombre}: ${estudiante.nota} - ${estudiante.nota >= notaCorte ? 'Aprobado' : 'Reprobado'}<br>`;
-    });
+        }
 
-    // Calcular el promedio de notas
-    const promedio = (totalNotas / estudiantes.length).toFixed(2);
-    resultadoTexto += `<strong>Promedio general: ${promedio}</strong>`; // Agregar el promedio al texto de resultados
-
-    // Mostrar los resultados en el elemento HTML correspondiente
-    document.getElementById("resultadoNotas").innerHTML = resultadoTexto;
-    mostrarRanking(); // Llamar a la función para mostrar el ranking de estudiantes
-}
-
-// Función para mostrar el ranking de estudiantes
-function mostrarRanking() {
-    // Ordenar estudiantes por nota de mayor a menor
-    const rankingEstudiantes = estudiantes.sort((a, b) => b.nota - a.nota);
-    // Crear el texto para mostrar el ranking
-    const rankingTexto = rankingEstudiantes.map((estudiante, index) => `${index + 1}. ${estudiante.nombre}: ${estudiante.nota}`).join("<br>");
-
-    // Mostrar el ranking en el elemento HTML correspondiente
-    document.getElementById("ranking").innerHTML = `<strong>Ranking de estudiantes:</strong><br>${rankingTexto}`;
-}
-
-// Función para resetear el modal y limpiar los datos
-function resetModalNotas() {
-    // Limpiar los campos de entrada
-    document.getElementById("nombreEstudiante").value = "";
-    document.getElementById("notaEstudiante").value = "";
-    // Limpiar los resultados mostrados
-    document.getElementById("resultadoNotas").innerText = "";
-    document.getElementById("ranking").innerText = "";
-    estudiantes.length = 0; // Limpiar el array de estudiantes
-}
-
-
-// Validar palíndromo
-function validarPalindromo() {
-    const frase = document.getElementById("entradaPalindromo").value;
-
-    // Verificar que la entrada no esté vacía
-    if (frase.trim() === "") {
-        document.getElementById("resultadoPalindromo").innerText = "Por favor, ingresa una palabra o frase válida.";
-        return;
-    }
-
-    // Convertir a minúsculas, normalizar y eliminar espacios y caracteres no alfanuméricos
-    const textoLimpio = frase.toLowerCase()
-        .normalize("NFD") // Normalizar
-        .replace(/[\u0300-\u036f]/g, "") // Eliminar marcas de acento
-        .replace(/[^a-z0-9ñ]/g, ""); // Mantener letras y números
-
-    const esPalindromo = textoLimpio === textoLimpio.split("").reverse().join("");
-
-    document.getElementById("resultadoPalindromo").innerText = esPalindromo ? `"${frase}" es un palíndromo.` : `"${frase}" no es un palíndromo.`;
-}
-
-
-
-// Convertir unidades de longitud
-//hacemos el recojo de valores
-function convertirUnidades() {
-    const valor = parseFloat(document.getElementById("valorLongitud").value);
-    if (isNaN(valor)) {
-        document.getElementById("resultadoConversionLongitud").innerText = "Por favor, ingresa un valor numérico para la longitud.";
-        return;
-    }
-
-    const desde = document.getElementById("unidadDesdeLongitud").value;
-    const hasta = document.getElementById("unidadHastaLongitud").value;
-    let resultado;
-    //recojemos los valores y los convertimos segun sea el caso
-    if (desde === "metros" && hasta === "kilometros") {
-        resultado = valor / 1000;
-    } else if (desde === "kilometros" && hasta === "metros") {
-        resultado = valor * 1000;
-    } else if (desde === "centimetros" && hasta === "metros") {
-        resultado = valor / 100;
-    } else if (desde === "metros" && hasta === "centimetros") {
-        resultado = valor * 100;
-    } else {
-        resultado = valor;
-    }
-
-    document.getElementById("resultadoConversionLongitud").innerText = `Resultado: ${resultado}`;
-}
-
-// Convertir unidades de masa
-function convertirMasa() {
-    const valor = parseFloat(document.getElementById("valorMasa").value);
-    if (isNaN(valor)) {
-        document.getElementById("resultadoConversionMasa").innerText = "Por favor, ingresa un valor numérico para la masa.";
-        return;
-    }
-
-    const desde = document.getElementById("unidadDesdeMasa").value;
-    const hasta = document.getElementById("unidadHastaMasa").value;
-    let resultado;
-    //de igual manera aca
-    if (desde === "gramos" && hasta === "kilogramos") {
-        resultado = valor / 1000;
-    } else if (desde === "kilogramos" && hasta === "gramos") {
-        resultado = valor * 1000;
-    } else {
-        resultado = valor; // Mismo tipo
-    }
-
-    document.getElementById("resultadoConversionMasa").innerText = `Resultado: ${resultado}`;
-}
-
-// Calcular edad en días
-function calcularEdad() {
-    const fechaNacimiento = new Date(document.getElementById("entradaFecha").value);
-
-    // Verificar si la fecha es válida
-    if (isNaN(fechaNacimiento.getTime())) {
-        document.getElementById("resultadoEdad").innerText = "Por favor, ingresa una fecha válida.";
-        return;
-    }
-
-    const hoy = new Date();
-
-    // verificar horas
-    hoy.setHours(0, 0, 0, 0);
-
-    // Calcular diferencia en días
-    const edadEnDias = Math.floor((hoy - fechaNacimiento) / (1000 * 60 * 60 * 24));
-
-    document.getElementById("resultadoEdad").innerText = `Tu edad es aproximadamente ${edadEnDias} días.`;
-}
-
-// Calcular factorial
-function calcularFactorial() {
-    const numero = parseInt(document.getElementById("entradaFactorial").value);
-    const limite = 170; // Puedes ajustar este límite según lo que consideres
-
-    if (isNaN(numero) || numero < 0) {
-        document.getElementById("resultadoFactorial").innerText = "Por favor, ingresa un número entero no negativo.";
-        return;
-    }
-
-    if (numero > limite) {
-        document.getElementById("resultadoFactorial").innerText = "El factorial de " + numero + " es infinito.";
-        return;
-    }
-
-    let factorial = 1;
-    for (let i = 1; i <= numero; i++) {
-        factorial *= i;
-    }
-
-    document.getElementById("resultadoFactorial").innerText = `El factorial de ${numero} es ${factorial}.`;
-}
-
-//Cifrado cesar
-function cifrarCesar() {
-    // Obtener el texto ingresado por el usuario
-    const texto = document.getElementById("entradaTexto").value;
-
-    // Obtener y convertir el desplazamiento ingresado por el usuario a un número entero
-    let desplazamiento = parseInt(document.getElementById("entradaDesplazamiento").value);
-
-    // almacenar el resultado cifrado
-    let resultado = "";
-
-    // Verificar si el desplazamiento ingresado es un número válido
-    if (isNaN(desplazamiento)) {
-        document.getElementById("resultadoCesar").innerText = "Por favor, ingresa un número válido para el desplazamiento.";
-        return; // Salir de la función si el desplazamiento no es válido
-    }
-
-    // Verificar si el desplazamiento está dentro del rango permitido (0-25)
-    if (desplazamiento < 0 || desplazamiento > 25) {
-        document.getElementById("resultadoCesar").innerText = "El desplazamiento debe estar entre 0 y 25.";
-        return; // Salir de la función si el desplazamiento no está en el rango permitido
-    }
-
-    // Recorrer cada carácter del texto ingresado
-    for (let i = 0; i < texto.length; i++) {
-        let char = texto[i]; // Obtener el carácter actual
-
-        // Verificar si el carácter es una letra (mayúscula o minúscula)
-        if (char.match(/[a-z]/i)) {
-            const code = texto.charCodeAt(i); // Obtener el código ASCII del carácter
-            const base = (char === char.toLowerCase()) ? 97 : 65; // Determinar la base (97 para minúsculas, 65 para mayúsculas)
-
-            // Aplicar el desplazamiento al carácter y convertirlo de nuevo a carácter utilizando String.fromCharCode
-            resultado += String.fromCharCode(((code - base + desplazamiento) % 26) + base);
+        // Mostrar resultado
+        if (area > 0) {
+            document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`; // Mostrar área
         } else {
-            // Si el carácter no es una letra, se deja sin cifrar
-            resultado += char;
+            document.getElementById("resultadoArea").innerText = `Por favor, ingresa valores válidos.`; // Mensaje de error
         }
     }
 
-    // Mostrar el resultado cifrado en el elemento con id "resultadoCesar"
-    document.getElementById("resultadoCesar").innerText = `Texto cifrado: ${resultado}`;
-}
+    // Ejecutar mostrarInputs al cargar
+    document.addEventListener('DOMContentLoaded', function () {
+        mostrarInputs(); // Ejecutar al cargar para mostrar la primera opción seleccionada
+    });
+
+    // Simulador de notas
+    const estudiantes = []; // Array para almacenar los estudiantes y sus notas
+    const notaCorte = 12;
+
+    // Función para agregar una nueva nota
+    function agregarNota() {
+        // Obtener el nombre y la nota ingresados por el usuario
+        const nombre = document.getElementById("nombreEstudiante").value.trim();
+        const nota = document.getElementById("notaEstudiante").value.trim(); // Obtener la nota como cadena
+
+        // Validar la entrada
+        const esNumeroValido = /^\d+(\.\d+)?$/.test(nota); // Verificar que sea un número válido
+        const esNombreValido = /^[A-Za-z\s]+$/.test(nombre); // Verificar solo letras y espacios
+
+        if (nombre === "" || !esNombreValido || !esNumeroValido || Number(nota) < 0 || Number(nota) > 20) {
+            document.getElementById("resultadoNotas").innerText = "Por favor, ingresa un nombre válido (solo letras) y una nota válida (0-20).";
+            return; // Validacion
+        }
+
+        // Convertir la nota a número para hacer el calculo
+        const notaNumero = Number(nota);
+
+        // Verificar si el estudiante ya existe en el array
+        const estudianteExistente = estudiantes.find(est => est.nombre.toLowerCase() === nombre.toLowerCase());
+
+        if (estudianteExistente) {
+            // Si existe, actualizar la nota
+            estudianteExistente.nota = notaNumero;
+        } else {
+            // Si no existe, agregar nuevo estudiante
+            estudiantes.push({ nombre, nota: notaNumero });
+        }
+
+        // Calcular el promedio y mostrar resultados
+        mostrarResultados();
+    }
+
+    // Función para mostrar los resultados
+    function mostrarResultados() {
+        let totalNotas = 0; // Variable para acumular el total de notas
+        let resultadoTexto = ""; // Variable para almacenar el texto de resultados
+
+        // Calcular el total y generar el texto de resultados
+        estudiantes.forEach(estudiante => {
+            totalNotas += estudiante.nota; // Sumar la nota del estudiante al total
+            // Crear el texto con el nombre, la nota y si está aprobado o reprobado
+            resultadoTexto += `${estudiante.nombre}: ${estudiante.nota} - ${estudiante.nota >= notaCorte ? 'Aprobado' : 'Reprobado'}<br>`;
+        });
+
+        // Calcular el promedio de notas
+        const promedio = (totalNotas / estudiantes.length).toFixed(2);
+        resultadoTexto += `<strong>Promedio general: ${promedio}</strong>`; // Agregar el promedio al texto de resultados
+
+        // Mostrar los resultados en el elemento HTML correspondiente
+        document.getElementById("resultadoNotas").innerHTML = resultadoTexto;
+        mostrarRanking(); // Llamar a la función para mostrar el ranking de estudiantes
+    }
+
+    // Función para mostrar el ranking de estudiantes
+    function mostrarRanking() {
+        // Ordenar estudiantes por nota de mayor a menor
+        const rankingEstudiantes = estudiantes.sort((a, b) => b.nota - a.nota);
+        // Crear el texto para mostrar el ranking
+        const rankingTexto = rankingEstudiantes.map((estudiante, index) => `${index + 1}. ${estudiante.nombre}: ${estudiante.nota}`).join("<br>");
+
+        // Mostrar el ranking en el elemento HTML correspondiente
+        document.getElementById("ranking").innerHTML = `<strong>Ranking de estudiantes:</strong><br>${rankingTexto}`;
+    }
+
+    // Función para resetear el modal y limpiar los datos
+    function resetModalNotas() {
+        // Limpiar los campos de entrada
+        document.getElementById("nombreEstudiante").value = "";
+        document.getElementById("notaEstudiante").value = "";
+        // Limpiar los resultados mostrados
+        document.getElementById("resultadoNotas").innerText = "";
+        document.getElementById("ranking").innerText = "";
+        estudiantes.length = 0; // Limpiar el array de estudiantes
+    }
+
+
+    // Validar palíndromo
+    function validarPalindromo() {
+        const frase = document.getElementById("entradaPalindromo").value;
+
+        // Verificar que la entrada no esté vacía
+        if (frase.trim() === "") {
+            document.getElementById("resultadoPalindromo").innerText = "Por favor, ingresa una palabra o frase válida.";
+            return;
+        }
+
+        // Convertir a minúsculas, normalizar y eliminar espacios y caracteres no alfanuméricos
+        const textoLimpio = frase.toLowerCase()
+            .normalize("NFD") // Normalizar
+            .replace(/[\u0300-\u036f]/g, "") // Eliminar marcas de acento
+            .replace(/[^a-z0-9ñ]/g, ""); // Mantener letras y números
+
+        const esPalindromo = textoLimpio === textoLimpio.split("").reverse().join("");
+
+        document.getElementById("resultadoPalindromo").innerText = esPalindromo ? `"${frase}" es un palíndromo.` : `"${frase}" no es un palíndromo.`;
+    }
+
+
+
+    // Convertir unidades de longitud
+    //hacemos el recojo de valores
+    function convertirUnidades() {
+        const valor = parseFloat(document.getElementById("valorLongitud").value);
+        if (isNaN(valor)) {
+            document.getElementById("resultadoConversionLongitud").innerText = "Por favor, ingresa un valor numérico para la longitud.";
+            return;
+        }
+
+        const desde = document.getElementById("unidadDesdeLongitud").value;
+        const hasta = document.getElementById("unidadHastaLongitud").value;
+        let resultado;
+        //recojemos los valores y los convertimos segun sea el caso
+        if (desde === "metros" && hasta === "kilometros") {
+            resultado = valor / 1000;
+        } else if (desde === "kilometros" && hasta === "metros") {
+            resultado = valor * 1000;
+        } else if (desde === "centimetros" && hasta === "metros") {
+            resultado = valor / 100;
+        } else if (desde === "metros" && hasta === "centimetros") {
+            resultado = valor * 100;
+        } else {
+            resultado = valor;
+        }
+
+        document.getElementById("resultadoConversionLongitud").innerText = `Resultado: ${resultado}`;
+    }
+
+    // Convertir unidades de masa
+    function convertirMasa() {
+        const valor = parseFloat(document.getElementById("valorMasa").value);
+        if (isNaN(valor)) {
+            document.getElementById("resultadoConversionMasa").innerText = "Por favor, ingresa un valor numérico para la masa.";
+            return;
+        }
+
+        const desde = document.getElementById("unidadDesdeMasa").value;
+        const hasta = document.getElementById("unidadHastaMasa").value;
+        let resultado;
+        //de igual manera aca
+        if (desde === "gramos" && hasta === "kilogramos") {
+            resultado = valor / 1000;
+        } else if (desde === "kilogramos" && hasta === "gramos") {
+            resultado = valor * 1000;
+        } else {
+            resultado = valor; // Mismo tipo
+        }
+
+        document.getElementById("resultadoConversionMasa").innerText = `Resultado: ${resultado}`;
+    }
+
+    // Calcular edad en días
+    function calcularEdad() {
+        const fechaNacimiento = new Date(document.getElementById("entradaFecha").value);
+
+        // Verificar si la fecha es válida
+        if (isNaN(fechaNacimiento.getTime())) {
+            document.getElementById("resultadoEdad").innerText = "Por favor, ingresa una fecha válida.";
+            return;
+        }
+
+        const hoy = new Date();
+
+        // verificar horas
+        hoy.setHours(0, 0, 0, 0);
+
+        // Calcular diferencia en días
+        const edadEnDias = Math.floor((hoy - fechaNacimiento) / (1000 * 60 * 60 * 24));
+
+        document.getElementById("resultadoEdad").innerText = `Tu edad es aproximadamente ${edadEnDias} días.`;
+    }
+
+    // Calcular factorial
+    function calcularFactorial() {
+        const numero = parseInt(document.getElementById("entradaFactorial").value);
+        const limite = 170; // Puedes ajustar este límite según lo que consideres
+
+        if (isNaN(numero) || numero < 0) {
+            document.getElementById("resultadoFactorial").innerText = "Por favor, ingresa un número entero no negativo.";
+            return;
+        }
+
+        if (numero > limite) {
+            document.getElementById("resultadoFactorial").innerText = "El factorial de " + numero + " es infinito.";
+            return;
+        }
+
+        let factorial = 1;
+        for (let i = 1; i <= numero; i++) {
+            factorial *= i;
+        }
+
+        document.getElementById("resultadoFactorial").innerText = `El factorial de ${numero} es ${factorial}.`;
+    }
+
+    //Cifrado cesar
+    function cifrarCesar() {
+        // Obtener el texto ingresado por el usuario
+        const texto = document.getElementById("entradaTexto").value;
+
+        // Obtener y convertir el desplazamiento ingresado por el usuario a un número entero
+        let desplazamiento = parseInt(document.getElementById("entradaDesplazamiento").value);
+
+        // almacenar el resultado cifrado
+        let resultado = "";
+
+        // Verificar si el desplazamiento ingresado es un número válido
+        if (isNaN(desplazamiento)) {
+            document.getElementById("resultadoCesar").innerText = "Por favor, ingresa un número válido para el desplazamiento.";
+            return; // Salir de la función si el desplazamiento no es válido
+        }
+
+        // Verificar si el desplazamiento está dentro del rango permitido (0-25)
+        if (desplazamiento < 0 || desplazamiento > 25) {
+            document.getElementById("resultadoCesar").innerText = "El desplazamiento debe estar entre 0 y 25.";
+            return; // Salir de la función si el desplazamiento no está en el rango permitido
+        }
+
+        // Recorrer cada carácter del texto ingresado
+        for (let i = 0; i < texto.length; i++) {
+            let char = texto[i]; // Obtener el carácter actual
+
+            // Verificar si el carácter es una letra (mayúscula o minúscula)
+            if (char.match(/[a-z]/i)) {
+                const code = texto.charCodeAt(i); // Obtener el código ASCII del carácter
+                const base = (char === char.toLowerCase()) ? 97 : 65; // Determinar la base (97 para minúsculas, 65 para mayúsculas)
+
+                // Aplicar el desplazamiento al carácter y convertirlo de nuevo a carácter utilizando String.fromCharCode
+                resultado += String.fromCharCode(((code - base + desplazamiento) % 26) + base);
+            } else {
+                // Si el carácter no es una letra, se deja sin cifrar
+                resultado += char;
+            }
+        }
+
+        // Mostrar el resultado cifrado en el elemento con id "resultadoCesar"
+        document.getElementById("resultadoCesar").innerText = `Texto cifrado: ${resultado}`;
+    }
 
 
 
 
 
-// Funciones para resetear los modales
-function resetModal1() {
-    document.getElementById("entradaContadorPares").value = "";
-    document.getElementById("resultadoContadorPares").innerText = "";
-}
+    // Funciones para resetear los modales
+    function resetModal1() {
+        document.getElementById("entradaContadorPares").value = "";
+        document.getElementById("resultadoContadorPares").innerText = "";
+    }
 
-function resetModal2() {
-    document.getElementById("entradaBase").value = "";
-    document.getElementById("entradaExponente").value = "";
-    document.getElementById("resultadoExponente").innerText = "";
-}
+    function resetModal2() {
+        document.getElementById("entradaBase").value = "";
+        document.getElementById("entradaExponente").value = "";
+        document.getElementById("resultadoExponente").innerText = "";
+    }
 
-function resetModal3() {
-    document.getElementById("entradaInversor").value = "";
-    document.getElementById("resultadoInversor").innerText = "";
-}
+    function resetModal3() {
+        document.getElementById("entradaInversor").value = "";
+        document.getElementById("resultadoInversor").innerText = "";
+    }
 
-function resetModal4() {
-    document.getElementById("entradaPrimos").value = "";
-    document.getElementById("resultadoPrimos").innerText = "";
-}
+    function resetModal4() {
+        document.getElementById("entradaPrimos").value = "";
+        document.getElementById("resultadoPrimos").innerText = "";
+    }
 
-function resetModal5() {
-    document.getElementById("entradaHoras").value = "";
-    document.getElementById("resultadoMinutos").innerText = "";
-}
+    function resetModal5() {
+        document.getElementById("entradaHoras").value = "";
+        document.getElementById("resultadoMinutos").innerText = "";
+    }
 
-function resetModal6() {
-    document.getElementById("tipoFigura").value = "";
-    document.getElementById("entradaLado").value = "";
-    document.getElementById("entradaAltura").value = "";
-    document.getElementById("resultadoArea").innerText = "";
-}
 
-function resetModal7() {
-    document.getElementById("entradaFraseUnica").value = "";
-    document.getElementById("resultadoPalabrasUnicas").innerText = "";
-}
+    function resetModal7() {
+        document.getElementById("entradaFraseUnica").value = "";
+        document.getElementById("resultadoPalabrasUnicas").innerText = "";
+    }
 
-function resetModal8() {
-    document.getElementById("entradaPalindromo").value = "";
-    document.getElementById("resultadoPalindromo").innerText = "";
-}
+    function resetModal6() {
+        // Reiniciar la selección y ocultar todos los inputs
+        document.getElementById("tipoFigura").selectedIndex = 0; // Reiniciar selección
+        mostrarInputs(); // Llamar a mostrarInputs para ocultar todos
+        document.getElementById("resultadoArea").innerText = ''; // Limpiar resultado
+    }
 
-function resetModal9() {
-    document.getElementById("valorLongitud").value = "";
-    document.getElementById("resultadoConversionLongitud").innerText = "";
-    document.getElementById("valorMasa").value = "";
-    document.getElementById("resultadoConversionMasa").innerText = "";
-}
+    function resetModal8() {
+        document.getElementById("entradaPalindromo").value = "";
+        document.getElementById("resultadoPalindromo").innerText = "";
+    }
 
-function resetModal10() {
-    document.getElementById("entradaFecha").value = "";
-    document.getElementById("resultadoEdad").innerText = "";
-}
+    function resetModal9() {
+        document.getElementById("valorLongitud").value = "";
+        document.getElementById("resultadoConversionLongitud").innerText = "";
+        document.getElementById("valorMasa").value = "";
+        document.getElementById("resultadoConversionMasa").innerText = "";
+    }
 
-// Resetear modal 11
-function resetModal11() {
-    document.getElementById("entradaFactorial").value = "";
-    document.getElementById("resultadoFactorial").innerText = "";
-}
+    function resetModal10() {
+        document.getElementById("entradaFecha").value = "";
+        document.getElementById("resultadoEdad").innerText = "";
+    }
 
-// Resetear modal 12
-function resetModal12() {
-    document.getElementById("entradaTexto").value = "";
-    document.getElementById("entradaDesplazamiento").value = "";
-    document.getElementById("resultadoCesar").innerText = "";
-}
+    // Resetear modal 11
+    function resetModal11() {
+        document.getElementById("entradaFactorial").value = "";
+        document.getElementById("resultadoFactorial").innerText = "";
+    }
+
+    // Resetear modal 12
+    function resetModal12() {
+        document.getElementById("entradaTexto").value = "";
+        document.getElementById("entradaDesplazamiento").value = "";
+        document.getElementById("resultadoCesar").innerText = "";
+    }
