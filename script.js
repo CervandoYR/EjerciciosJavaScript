@@ -113,7 +113,7 @@ function calcularArea() {
         if (!isNaN(largo) && largo > 0 && !isNaN(ancho) && ancho > 0) {
             area = largo * ancho;
         }
-    
+    }
     if (typeof area !== 'undefined') {
         document.getElementById("resultadoArea").innerText = `Área de la figura: ${area}`;
     } else {
