@@ -290,9 +290,13 @@ function calcularEdad() {
     }
 
     const hoy = new Date();
-
-    // verificar horas
     hoy.setHours(0, 0, 0, 0);
+
+    // Verificar si la fecha de nacimiento es en el futuro
+    if (fechaNacimiento > hoy) {
+        document.getElementById("resultadoEdad").innerText = "La fecha de nacimiento no puede ser en el futuro.";
+        return;
+    }
 
     // Calcular diferencia en días
     const edadEnDias = Math.floor((hoy - fechaNacimiento) / (1000 * 60 * 60 * 24));
@@ -322,50 +326,141 @@ function calcularFactorial() {
 
     document.getElementById("resultadoFactorial").innerText = `El factorial de ${numero} es ${factorial}.`;
 }
+// Mostrar inputs cesar y polybios
+// Mostrar u ocultar campos de entrada según el método seleccionado
+function mostrarInputs() {
+    const metodo = document.getElementById("metodoCifrado").value;
 
-//Cifrado cesar
-function cifrarCesar() {
-    // Obtener el texto ingresado por el usuario
-    const texto = document.getElementById("entradaTexto").value;
+    // Ocultar todos los inputs
+    document.getElementById("inputsCesar").classList.add("d-none");
+    document.getElementById("inputsPolybios").classList.add("d-none");
 
-    // Obtener y convertir el desplazamiento ingresado por el usuario a un número entero
+    // Limpiar resultados y valores de inputs
+    document.getElementById("resultadoCesar").innerText = '';
+    document.getElementById("entradaTextoCesar").value = '';
+    document.getElementById("entradaDesplazamiento").value = '';
+    document.getElementById("entradaTextoPolybios").value = '';
+
+    // Mostrar inputs correspondientes al método seleccionado
+    if (metodo === "cesar") {
+        document.getElementById("inputsCesar").classList.remove("d-none");
+    } else if (metodo === "polybios") {
+        document.getElementById("inputsPolybios").classList.remove("d-none");
+    }
+}
+
+// Función para cifrar con César
+function cifrarCesar(descifrar = false) {
+    const texto = document.getElementById("entradaTextoCesar").value;
     let desplazamiento = parseInt(document.getElementById("entradaDesplazamiento").value);
-
-    // almacenar el resultado cifrado
     let resultado = "";
 
-    // Verificar si el desplazamiento ingresado es un número válido
     if (isNaN(desplazamiento)) {
         document.getElementById("resultadoCesar").innerText = "Por favor, ingresa un número válido para el desplazamiento.";
-        return; // Salir de la función si el desplazamiento no es válido
+        return;
     }
 
-    // Verificar si el desplazamiento está dentro del rango permitido (0-25)
     if (desplazamiento < 0 || desplazamiento > 25) {
         document.getElementById("resultadoCesar").innerText = "El desplazamiento debe estar entre 0 y 25.";
-        return; // Salir de la función si el desplazamiento no está en el rango permitido
+        return;
     }
 
-    // Recorrer cada carácter del texto ingresado
+    // Si es para descifrar, invertimos el desplazamiento
+    if (descifrar) {
+        desplazamiento = -desplazamiento;
+    }
+
     for (let i = 0; i < texto.length; i++) {
-        let char = texto[i]; // Obtener el carácter actual
+        let char = texto[i];
 
-        // Verificar si el carácter es una letra (mayúscula o minúscula)
         if (char.match(/[a-z]/i)) {
-            const code = texto.charCodeAt(i); // Obtener el código ASCII del carácter
-            const base = (char === char.toLowerCase()) ? 97 : 65; // Determinar la base (97 para minúsculas, 65 para mayúsculas)
-
-            // Aplicar el desplazamiento al carácter y convertirlo de nuevo a carácter utilizando String.fromCharCode
-            resultado += String.fromCharCode(((code - base + desplazamiento) % 26) + base);
+            const code = texto.charCodeAt(i);
+            const base = (char === char.toLowerCase()) ? 97 : 65;
+            resultado += String.fromCharCode(((code - base + desplazamiento + 26) % 26) + base);
         } else {
-            // Si el carácter no es una letra, se deja sin cifrar
-            resultado += char;
+            resultado += char; // Mantener caracteres no alfabéticos
         }
     }
 
-    // Mostrar el resultado cifrado en el elemento con id "resultadoCesar"
-    document.getElementById("resultadoCesar").innerText = `Texto cifrado: ${resultado}`;
+    document.getElementById("resultadoCesar").innerText = `Texto ${descifrar ? 'descifrado' : 'cifrado'}: ${resultado}`;
 }
+
+// Mapa para cifrar con Polybios
+const tablaPolybios = {
+    'A': '11', 'B': '12', 'C': '13', 'D': '14', 'E': '15',
+    'F': '21', 'G': '22', 'H': '23', 'I': '24', 'J': '24', 'K': '25',
+    'L': '31', 'M': '32', 'N': '33', 'O': '34', 'P': '35',
+    'Q': '41', 'R': '42', 'S': '43', 'T': '44', 'U': '45',
+    'V': '51', 'W': '52', 'X': '53', 'Y': '54', 'Z': '55'
+};
+
+// Función para cifrar usando Polybios
+function cifrarPolybios() {
+    const texto = document.getElementById("entradaTextoPolybios").value.toUpperCase();
+    let resultado = "";
+
+    for (let i = 0; i < texto.length; i++) {
+        const char = texto[i];
+        // Solo cifrar si es una letra del alfabeto
+        if (char.match(/[A-Z]/)) {
+            resultado += tablaPolybios[char] + " "; // Añadir espacio para separar los números
+        } else {
+            resultado += char; // Mantener caracteres no alfabéticos
+        }
+    }
+
+    document.getElementById("resultadoCesar").innerText = `Texto cifrado (Polybios): ${resultado.trim()}`;
+}
+
+// Mapa inverso para descifrar con Polybios
+const tablaPolybiosInversa = {
+    '11': 'A', '12': 'B', '13': 'C', '14': 'D', '15': 'E',
+    '21': 'F', '22': 'G', '23': 'H', '24': 'I/J', '25': 'K',
+    '31': 'L', '32': 'M', '33': 'N', '34': 'O', '35': 'P',
+    '41': 'Q', '42': 'R', '43': 'S', '44': 'T', '45': 'U',
+    '51': 'V', '52': 'W', '53': 'X', '54': 'Y', '55': 'Z'
+};
+
+// Función para descifrar usando Polybios
+function descifrarPolybios() {
+    const texto = document.getElementById("entradaTextoPolybios").value.trim();
+    let resultado = "";
+    const pares = texto.split(" "); // Separar el texto cifrado en pares
+
+    for (let i = 0; i < pares.length; i++) {
+        const par = pares[i];
+        if (tablaPolybiosInversa[par]) {
+            resultado += tablaPolybiosInversa[par]; // Traducir el par de números a la letra correspondiente
+        } else {
+            resultado += par; // Si no es un par válido, dejarlo como está
+        }
+    }
+
+    document.getElementById("resultadoCesar").innerText = `Texto descifrado (Polybios): ${resultado}`;
+}
+
+// Función para procesar el cifrado basado en la selección
+function procesarCifrado() {
+    const metodo = document.getElementById("metodoCifrado").value;
+
+    if (metodo === "cesar") {
+        cifrarCesar();
+    } else if (metodo === "polybios") {
+        cifrarPolybios();
+    }
+}
+
+// Función para procesar el descifrado basado en la selección
+function procesarDescifrado() {
+    const metodo = document.getElementById("metodoCifrado").value;
+
+    if (metodo === "cesar") {
+        cifrarCesar(true); // 'true' indica que es para descifrar
+    } else if (metodo === "polybios") {
+        descifrarPolybios();
+    }
+}
+
 
 
 
@@ -436,7 +531,19 @@ function resetModal11() {
 
 // Resetear modal 12
 function resetModal12() {
-    document.getElementById("entradaTexto").value = "";
+    // Limpiar campos de entrada para César
+    document.getElementById("entradaTextoCesar").value = "";
     document.getElementById("entradaDesplazamiento").value = "";
+
+    // Limpiar campos de entrada para Polybios
+    document.getElementById("entradaTextoPolybios").value = "";
+
+    // Limpiar resultados
     document.getElementById("resultadoCesar").innerText = "";
+
+    // Resetear selección de método
+    document.getElementById("metodoCifrado").value = '';
+
+    // Mostrar u ocultar campos según la selección del método (vacío en este caso)
+    mostrarInputs();
 }

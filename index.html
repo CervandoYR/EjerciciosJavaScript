@@ -73,7 +73,7 @@
             <div class="col-md-4 mb-3">
                 <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal12"
                     style="margin: 20px; padding: 30px;">Ejercicio 12:
-                    Cifrado cesar</button>
+                    Cifrado cesar y Polybios</button>
             </div>
 
         </div>
@@ -342,27 +342,50 @@
         </div>
     </div>
 
-    <!-- Modal 12: Cifrador César -->
+    <!-- Modal 12: Cifrador César y Polybios -->
     <div class="modal fade" id="modal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
         data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Ejercicio 12: Cifrador César</h5>
+                    <h5 class="modal-title">Ejercicio 12: Cifrador César y Polybios</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Introduce un texto y un desplazamiento para cifrar.</p>
-                    <input type="text" id="entradaTexto" class="form-control" placeholder="Escribe un texto">
-                    <input type="number" id="entradaDesplazamiento" class="form-control mt-2"
-                        placeholder="Desplazamiento" min="1">
-                    <button class="btn btn-success mt-2" onclick="cifrarCesar()">Cifrar</button>
+                    <p>Selecciona un método de cifrado para mostrar los campos correspondientes.</p>
+
+                    <!-- Selector para elegir el método de cifrado -->
+                    <select id="metodoCifrado" class="form-control" onchange="mostrarInputs()">
+                        <option value="">Selecciona un método</option>
+                        <option value="cesar">Cifrado César</option>
+                        <option value="polybios">Cifrado de Polybios</option>
+                    </select>
+
+                    <!-- Inputs que aparecen según el método seleccionado -->
+                    <div id="inputsCesar" class="d-none">
+                        <input type="text" id="entradaTextoCesar" class="form-control mt-2"
+                            placeholder="Escribe un texto">
+                        <input type="number" id="entradaDesplazamiento" class="form-control mt-2"
+                            placeholder="Desplazamiento" min="1">
+                    </div>
+                    <div id="inputsPolybios" class="d-none">
+                        <input type="text" id="entradaTextoPolybios" class="form-control mt-2"
+                            placeholder="Escribe un texto">
+                    </div>
+
+                    <button class="btn btn-primary mt-2" onclick="procesarCifrado()">Cifrar</button>
+                    <button class="btn btn-warning mt-2" onclick="procesarDescifrado()">Descifrar</button>
                     <button class="btn btn-danger mt-2" onclick="resetModal12()">Resetear</button>
+
                     <p id="resultadoCesar"></p>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
