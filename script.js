@@ -328,7 +328,7 @@ function calcularFactorial() {
 }
 // Mostrar inputs cesar y polybios
 // Mostrar u ocultar campos de entrada según el método seleccionado
-function mostrarInputs() {
+function mostrarInputsCifrado() {
     const metodo = document.getElementById("metodoCifrado").value;
 
     // Ocultar todos los inputs
